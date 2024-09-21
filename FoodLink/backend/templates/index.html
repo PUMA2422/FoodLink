@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - FoodLink</title>
-    <link rel="stylesheet" href="styles.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -15,9 +16,15 @@
             <li><a href="#">About</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Contact</a></li>
-            <li><a href="Login.html" class="login-btn">Login</a></li>
+            <li><button class="login-btn" id="login_button">Login</button></li>
         </ul>
     </nav>
+    <script>
+        // Redirect to login page when the login button is clicked
+        document.getElementById('login_button').addEventListener('click', function() {
+            window.location.href = '/login'; // Redirects to the /login URL
+        });
+    </script>
 
     <!-- Hero Section -->
     <header class="hero">

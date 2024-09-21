@@ -1,3 +1,7 @@
+// Get the current base URL dynamically
+const baseUrl = window.location.origin;
+
+// Event listener for login form submission
 document.getElementById('loginForm').addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -5,7 +9,8 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
     const password = document.getElementById('loginPassword').value;
 
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/register/', {
+        // Use dynamic base URL instead of hardcoding it
+        const response = await fetch(`${baseUrl}/api/login/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -16,7 +21,7 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
         const data = await response.json();
 
         if (response.ok) {
-            // Store the tokens (access and refresh) for future authenticated requests
+            // Store tokens in localStorage for future use
             localStorage.setItem('accessToken', data.access);
             localStorage.setItem('refreshToken', data.refresh);
             alert('Login successful!');
@@ -30,6 +35,7 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
     }
 });
 
+// Event listener for signup form submission
 document.getElementById('signupForm').addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -38,7 +44,8 @@ document.getElementById('signupForm').addEventListener('submit', async (event) =
     const password = document.getElementById('signupPassword').value;
 
     try {
-        const response = await fetch('http://127.0.0.1:8000/api/register/', {
+        // Use dynamic base URL for the signup API
+        const response = await fetch(`${baseUrl}/api/register/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,7 +57,7 @@ document.getElementById('signupForm').addEventListener('submit', async (event) =
 
         if (response.ok) {
             alert('Signup successful! You can now login.');
-            window.location.href = 'Login.html'; // Redirect to login page
+            window.location.href = `${baseUrl}/login`; // Redirect to login page
         } else {
             alert('Signup failed: ' + JSON.stringify(data));
         }
