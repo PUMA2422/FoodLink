@@ -19,19 +19,14 @@
             <li><button class="login-btn" id="login_button">Login</button></li>
         </ul>
     </nav>
-    <script>
-        // Redirect to login page when the login button is clicked
-        document.getElementById('login_button').addEventListener('click', function() {
-            window.location.href = '/login'; // Redirects to the /login URL
-        });
-    </script>
+    
 
     <!-- Hero Section -->
     <header class="hero">
         <div class="hero-content">
             <h1>Connecting Surplus Food to Those in Need</h1>
             <p>Join us in the fight against food waste. Together, we can make a difference.</p>
-            <a href="#" class="hero-btn">Get Started</a>
+            <button class="hero-btn" id="get-started">Get Started</button>
         </div>
     </header>
 
@@ -57,5 +52,14 @@
     <footer class="footer">
         <p>&copy; 2024 FoodLink. All rights reserved.</p>
     </footer>
+    <script>
+        // Redirect to login page when the login button is clicked
+        document.getElementById('login_button').addEventListener('click', function() {
+            window.location.href = '/login'; // Redirects to the /login URL
+        });
+        document.getElementById('get-started').addEventListener('click', function() {
+            window.location.href = '/signup'; // Redirects to the /login URL
+        });
+    </script>
 </body>
 </html>
