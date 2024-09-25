@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup Page</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'Login.css' %}">
+    <link rel="stylesheet" href="{% static 'login.css' %}">
 
 </head>
 <body>
@@ -15,21 +15,39 @@
             <div class="input-group">
                 <label for="username">Username</label>
                 <input type="text" id="signupUsername" name="username" required>
+                <!-- Placeholder for username validation message -->
+                <div id="username-message" class="validation-message"></div>
             </div>
+            
             <div class="input-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
+                <!-- Placeholder for email validation message -->
+                <div id="email-message" class="validation-message"></div>
             </div>
             <div class="input-group">
                 <label for="password">Password</label>
                 <input type="password" id="signupPassword" name="password" required>
             </div>
+            <div>
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="restaurant">Restaurant</option>
+                    <option value="ngo">NGO</option>
+                </select>
+            </div>
             <button type="submit">Signup</button>
         </form>
         <!-- Link to navigate back to the login page -->
         <div class="back-to-home">
-            <a href="Login.html">Already have an account? Login here</a>
+            <a href="{% url 'login' %}">Already have an account? Login here</a>
         </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toast-message"></span>
+        <button class="close-btn" onclick="hideToast()">x</button>
     </div>
 
     <script src="{% static 'auth.js' %}"></script>

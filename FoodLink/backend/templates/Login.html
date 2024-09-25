@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'Login.css' %}">
+    <link rel="stylesheet" href="{% static 'login.css' %}">
 </head>
 <body>
     <div class="login-container">
@@ -21,10 +21,15 @@
             </div>
             <button type="submit">Login</button>
         </form>
-        <!-- Link to navigate to the signup page -->
         <div class="back-to-home">
-            <a href="Signup.html">Don't have an account? Signup here</a>
+            <a href="{% url 'signup' %}">Don't have an account? Signup here</a>
         </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span id="toast-message"></span>
+        <button class="close-btn" onclick="hideToast()">x</button>
     </div>
 
     <script src="{% static 'auth.js' %}"></script>

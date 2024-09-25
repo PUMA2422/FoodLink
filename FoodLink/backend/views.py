@@ -6,6 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
 from django.contrib.auth.models import User
 from django.shortcuts import render
+from django.http import JsonResponse
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -37,3 +38,20 @@ def signup_view(request):
 
 def home_view(request):
     return render(request, 'index.html')
+
+def dashboard_view(request):
+    return render(request, 'dashboard.html')
+
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def check_username(request):
+    username = request.GET.get('username')
+    exists = User.objects.filter(username=username).exists()
+    return JsonResponse({'available': not exists})
+
+@api_view(['GET'])
+@permission_classes([permissions.AllowAny])
+def check_email(request):
+    email = request.GET.get('email')
+    exists = User.objects.filter(email=email).exists()
+    return JsonResponse({'available': not exists})
