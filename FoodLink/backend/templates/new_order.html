@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>New Donation | Food Rescue Connect</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dashboard/new_order.css' %}">
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Create a New Donation</h1>
+
+        <p>Fill out the details below to donate surplus food to an NGO.</p>
+
+    </header>
+
+
+
+    <section class="donation-form">
+
+        <form action="/submit-donation" method="POST">
+
+            <div class="form-group">
+
+                <label for="restaurant-name">Restaurant Name:</label>
+
+                <input type="text" id="restaurant-name" name="restaurantName" required>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="food-items">Food Items (Description):</label>
+
+                <textarea id="food-items" name="foodItems" rows="4" required></textarea>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="quantity">Quantity (Approx.):</label>
+
+                <input type="number" id="quantity" name="quantity" min="1" required>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="pickup-date">Pickup Date & Time:</label>
+
+                <input type="datetime-local" id="pickup-date" name="pickupDate" required>
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="ngo-selection">Select NGO:</label>
+
+                <select id="ngo-selection" name="ngoSelection">
+
+                    <option value="">Any</option>
+
+                    <option value="ngo1">NGO 1</option>
+
+                    <option value="ngo2">NGO 2</option>
+
+                    <option value="ngo3">NGO 3</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="urgency">Urgency:</label>
+
+                <select id="ngo-selection" name="ngoSelection">
+
+                    <option value="high">High</option>
+
+                    <option value="moderate" selected>Moderate</option>
+
+                    <option value="low">Low</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <button type="submit" class="submit-btn">Submit Donation</button>
+
+                <button type="button" class="cancel-btn" onclick="location.href='dashboard.html'">Cancel</button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+
+
+    <footer>
+
+        <p>Need Help? Visit our <a href="#">Help Center</a> or <a href="#">Contact Support</a>.</p>
+
+    </footer>
+
+</body>
+
+</html>

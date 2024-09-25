@@ -18,12 +18,33 @@ class ObtainTokenView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
     def post(self, request, *args, **kwargs):
-        user = User.objects.get(username=request.data['username'])
-        refresh = RefreshToken.for_user(user)
-        return Response({
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-        })
+        username = request.data['username']
+        password = request.data['password']
+        role = request.data['role']  # Fetch the role from the login form
+
+        try:
+            user = User.objects.get(username=username)
+            
+            # Check the password
+            if not user.check_password(password):
+                return Response({'detail': 'Invalid password'}, status=400)
+
+            # Check if user has the appropriate role
+            if role == 'restaurant' and not hasattr(user, 'restaurant'):
+                return Response({'detail': 'No restaurant account found for this user'}, status=400)
+            elif role == 'ngo' and not hasattr(user, 'ngo'):
+                return Response({'detail': 'No NGO account found for this user'}, status=400)
+
+            # Generate JWT tokens if everything is fine
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            })
+
+        except User.DoesNotExist:
+            return Response({'detail': 'Invalid username'}, status=400)
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -41,6 +62,9 @@ def home_view(request):
 
 def dashboard_view(request):
     return render(request, 'dashboard.html')
+
+def new_order_view(request):
+    return render(request, 'new_order.html')
 
 @api_view(['GET'])
 @permission_classes([permissions.AllowAny])

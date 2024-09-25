@@ -23,27 +23,27 @@ function hideToast() {
 
 
 
-// Check if the signup form exists and add an event listener to it
 const signupForm = document.getElementById('signupForm');
 if (signupForm) {
     signupForm.addEventListener('submit', async (event) => {
         event.preventDefault();
-
+    
         const username = document.getElementById('signupUsername').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('signupPassword').value;
-
+        const role = document.getElementById('role').value;  // Include the role
+    
         try {
             const response = await fetch(`${baseUrl}/api/register/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, email, password }),
+                body: JSON.stringify({ username, email, password, role }),  // Send the role in the request
             });
-
+    
             const data = await response.json();
-
+    
             if (response.ok) {
                 showToast('Signup successful! Redirecting to Dashboard', 'success');
                 setTimeout(() => window.location.href = `${baseUrl}/dashboard`, 2000);
@@ -54,10 +54,11 @@ if (signupForm) {
             console.error('Error:', error);
             showToast('An error occurred. Please try again later.', 'error');
         }
-    });
+    });    
 }
 
-// Check if the login form exists and add an event listener to it
+
+
 const loginForm = document.getElementById('loginForm');
 if (loginForm) {
     loginForm.addEventListener('submit', async (event) => {
@@ -65,6 +66,7 @@ if (loginForm) {
 
         const username = document.getElementById('loginUsername').value;
         const password = document.getElementById('loginPassword').value;
+        const role = document.getElementById('role').value;  // Get the role
 
         try {
             const response = await fetch(`${baseUrl}/api/token/`, {
@@ -72,7 +74,7 @@ if (loginForm) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ username, password, role }),  // Include role
             });
 
             const data = await response.json();
@@ -92,20 +94,6 @@ if (loginForm) {
     });
 }
 
-// Real-time validation for username availability
-document.getElementById('signupUsername').addEventListener('input', async function() {
-    const username = this.value;
-    const response = await fetch(`${baseUrl}/api/check-username/?username=${username}`);
-    const data = await response.json();
-
-    if (data.available) {
-        this.classList.remove('error');
-        this.classList.add('available');
-    } else {
-        this.classList.add('error');
-        this.classList.remove('available');
-    }
-});
 
 // Real-time validation for email availability
 document.getElementById('email').addEventListener('input', async function() {

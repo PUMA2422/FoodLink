@@ -1,11 +1,123 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+
+
+    <title>Dashboard | Food Rescue Connect</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dashboard.css' %}">
+
 </head>
+
 <body>
-    <p>This is the dashboard page.</p>
+
+    <header>
+
+        <h1>Welcome to Food Rescue Connect!</h1>
+
+        <p>Efficient Food Redistribution Starts Here.</p>
+
+    </header>
+
+
+
+    <section class="quick-actions">
+
+        <h2>Quick Actions</h2>
+
+        <div class="action-buttons">
+
+            <button onclick="location.href='new-order/'">+ New Order</button>
+
+            <button onclick="location.href='#'">View Orders</button>
+
+            <button onclick="location.href='#'">My Orders</button>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="dashboard-overview">
+
+        <h2>Dashboard Overview</h2>
+
+        <div class="overview-cards">
+
+            <div class="card">
+
+                <h3>Active Donations</h3>
+
+                <p>Track donations currently being processed.</p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>NGOs Near You</h3>
+
+                <p>See nearby NGOs that need food donations.</p>
+
+            </div>
+
+            <div class="card">
+
+                <h3>Restaurant Activity</h3>
+
+                <p>Latest restaurants with surplus food available.</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="notifications">
+
+        <h2>Notifications</h2>
+
+        <ul>
+
+            <li><strong>Urgent Requests:</strong> Check for urgent donation requests.</li>
+
+            <li><strong>New Opportunities:</strong> Discover new restaurants and NGOs on the platform.</li>
+
+        </ul>
+
+    </section>
+
+
+
+    <section class="impact">
+
+        <h2>Your Impact</h2>
+
+        <p><strong>Total Donations Made:</strong> <span id="total-donations">0</span></p>
+
+        <p><strong>Food Waste Reduced:</strong> <span id="food-waste-reduced">0</span> tons</p>
+
+        <p><strong>Meals Contributed:</strong> <span id="meals-contributed">0</span></p>
+
+    </section>
+
+
+
+    <footer>
+
+        <p>Need Help? Visit our <a href="#">Help Center</a> or <a href="#">Contact Support</a>.</p>
+
+    </footer>
+
 </body>
+
 </html>
